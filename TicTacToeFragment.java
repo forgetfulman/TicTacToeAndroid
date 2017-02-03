@@ -12,10 +12,6 @@ import android.widget.ToggleButton;
 import java.util.HashMap;
 import java.util.Map;
 
-/**
- * Created by christoph on 22/01/2017.
- */
-
 public class TicTacToeFragment extends Fragment implements View.OnClickListener {
     private GameBoard ticTacToeBoard;
     private Button restartButton;
@@ -72,80 +68,11 @@ public class TicTacToeFragment extends Fragment implements View.OnClickListener 
 
     @Override
     public void onClick(View v) {
-        int x = 0;
-        int y = 0;
-        Button selectedButton = (Button) v.findViewById(v.getId());
+        TicTacToeToggleButton selectedButton = (TicTacToeToggleButton) v.findViewById(v.getId());
         String playerMark = (ticTacToeBoard.getCurrentPlayer() == Player.CROSS) ? "X" : "O";
-        switch (selectedButton.getId()) {
-
-            case R.id.toggleButton:
-                x = 0;
-                y = 0;
-                selectedButton.setText(playerMark);
-                selectedButton.setEnabled(false);
-                break;
-
-            case R.id.toggleButton2:
-                x = 1;
-                y = 0;
-                selectedButton.setText(playerMark);
-                selectedButton.setEnabled(false);
-                break;
-
-            case R.id.toggleButton3:
-                x = 2;
-                y = 0;
-                selectedButton.setText(playerMark);
-                selectedButton.setEnabled(false);
-                break;
-
-            case R.id.toggleButton4:
-                x = 0;
-                y = 1;
-                selectedButton.setText(playerMark);
-                selectedButton.setEnabled(false);
-                break;
-
-            case R.id.toggleButton5:
-                x = 1;
-                y = 1;
-                selectedButton.setText(playerMark);
-                selectedButton.setEnabled(false);
-                break;
-
-            case R.id.toggleButton6:
-                x = 2;
-                y = 1;
-                selectedButton.setText(playerMark);
-                selectedButton.setEnabled(false);
-                break;
-
-            case R.id.toggleButton7:
-                x = 0;
-                y = 2;
-                selectedButton.setText(playerMark);
-                selectedButton.setEnabled(false);
-                break;
-
-            case R.id.toggleButton8:
-                x = 1;
-                y = 2;
-                selectedButton.setText(playerMark);
-                selectedButton.setEnabled(false);
-                break;
-
-            case R.id.toggleButton9:
-                x = 2;
-                y = 2;
-                selectedButton.setText(playerMark);
-                selectedButton.setEnabled(false);
-                break;
-
-            default:
-                break;
-        }
-
-        ticTacToeBoard.makeMove(x,y);
+        selectedButton.setText(playerMark);
+        selectedButton.setEnabled(false);
+        ticTacToeBoard.makeMove(selectedButton.getX_coord(),selectedButton.getY_coord());
         mStatusField.setText(getGameStateDescription());
         if (ticTacToeBoard.getCurrentGameState() != GameState.PLAYING) {
             for (ToggleButton tb : buttons.values()) {
