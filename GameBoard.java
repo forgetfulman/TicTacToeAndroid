@@ -1,9 +1,6 @@
 package com.forgetfulman.tictactoe;
 
-/**
- * Created by christoph on 20/01/2017.
- */
-public class GameBoard {
+class GameBoard {
 
     private static int BOARD_ROWS = 3;
     private static int BOARD_COLS = 3;
@@ -13,14 +10,14 @@ public class GameBoard {
     private Player currentPlayer;
     private GameState currentGameState;
 
-    public GameBoard() {
+    GameBoard() {
         crossesState = 0b000000000;
         noughtsState = 0b000000000;
         currentPlayer = Player.CROSS;
         currentGameState = GameState.PLAYING;
     }
 
-    public GameState getCurrentGameState() {
+    GameState getCurrentGameState() {
         return this.currentGameState;
     }
 
@@ -28,7 +25,7 @@ public class GameBoard {
         this.currentGameState = gs;
     }
 
-    public Player getCurrentPlayer() {
+    Player getCurrentPlayer() {
         return currentPlayer;
     }
 
@@ -36,7 +33,7 @@ public class GameBoard {
         this.currentPlayer = p;
     }
 
-    public int getPlayerState(Player p) {
+    int getPlayerState(Player p) {
         return (p == Player.CROSS) ? crossesState : noughtsState;
     }
 
@@ -48,7 +45,7 @@ public class GameBoard {
         }
     }
 
-    public void makeMove(int x, int y) {
+    void makeMove(int x, int y) {
         int bitPosition = y * BOARD_ROWS + x;
         if (currentPlayer == Player.CROSS) {
             setPlayerState(crossesState | (0x1 << bitPosition), Player.CROSS);
@@ -58,11 +55,20 @@ public class GameBoard {
         setCurrentGameState(calculateGameState(currentPlayer));
     }
 
+    void makeMove(int x, int y, Player p) {
+        int bitPosition = y * BOARD_ROWS + x;
+        if (p == Player.CROSS) {
+            setPlayerState(crossesState | (0x1 << bitPosition), Player.CROSS);
+        } else {
+            setPlayerState(noughtsState | (0x1 << bitPosition), Player.NOUGHT);
+        }
+    }
+
     public int getBoardState() {
         return (crossesState & noughtsState);
     }
 
-    public void resetGame() {
+    void resetGame() {
         setPlayerState(0b000000000, Player.CROSS);
         setPlayerState(0b000000000, Player.NOUGHT);
         setCurrentPlayer(Player.CROSS);
