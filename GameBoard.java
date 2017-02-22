@@ -7,17 +7,17 @@ class GameBoard {
 
     private int crossesState;
     private int noughtsState;
-    private Player currentPlayer;
-    private GameState currentGameState;
+    //private Player currentPlayer;
+    //private GameState currentGameState;
 
     GameBoard() {
         crossesState = 0b000000000;
         noughtsState = 0b000000000;
-        currentPlayer = Player.CROSS;
-        currentGameState = GameState.PLAYING;
+        /*currentPlayer = Player.CROSS;
+        currentGameState = GameState.PLAYING;*/
     }
 
-    GameState getCurrentGameState() {
+    /*GameState getCurrentGameState() {
         return this.currentGameState;
     }
 
@@ -31,7 +31,7 @@ class GameBoard {
 
     private void setCurrentPlayer(Player p) {
         this.currentPlayer = p;
-    }
+    }*/
 
     int getPlayerState(Player p) {
         return (p == Player.CROSS) ? crossesState : noughtsState;
@@ -45,7 +45,7 @@ class GameBoard {
         }
     }
 
-    void makeMove(int x, int y) {
+    /*void makeMove(int x, int y) {
         int bitPosition = y * BOARD_ROWS + x;
         if (currentPlayer == Player.CROSS) {
             setPlayerState(crossesState | (0x1 << bitPosition), Player.CROSS);
@@ -53,7 +53,7 @@ class GameBoard {
             setPlayerState(noughtsState | (0x1 << bitPosition), Player.NOUGHT);
         }
         setCurrentGameState(calculateGameState(currentPlayer));
-    }
+    }*/
 
     void makeMove(int x, int y, Player p) {
         int bitPosition = y * BOARD_ROWS + x;
@@ -65,17 +65,22 @@ class GameBoard {
     }
 
     public int getBoardState() {
-        return (crossesState & noughtsState);
+        return ((getPlayerState(Player.CROSS) | getPlayerState(Player.NOUGHT)));
     }
 
-    void resetGame() {
+    /*void resetGame() {
         setPlayerState(0b000000000, Player.CROSS);
         setPlayerState(0b000000000, Player.NOUGHT);
         setCurrentPlayer(Player.CROSS);
         setCurrentGameState(GameState.PLAYING);
+    }*/
+
+    void resetGameBoard() {
+        setPlayerState(0b000000000, Player.CROSS);
+        setPlayerState(0b000000000, Player.NOUGHT);
     }
 
-    private GameState calculateGameState(Player p) {
+    /*private GameState calculateGameState(Player p) {
         int playerState = getPlayerState(Player.CROSS);
         if (getCurrentPlayer() == Player.CROSS) {
             setCurrentPlayer(Player.NOUGHT);
@@ -90,5 +95,5 @@ class GameBoard {
         }
 
         return ((getPlayerState(Player.CROSS) | getPlayerState(Player.NOUGHT)) == EndState.DRAW.state()) ? GameState.DRAW : GameState.PLAYING;
-    }
+    }*/
 }
