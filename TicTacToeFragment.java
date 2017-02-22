@@ -48,9 +48,9 @@ public class TicTacToeFragment extends Fragment implements View.OnClickListener 
             tb.setSaveEnabled(false);
         }
         mStatusField = (TextView) v.findViewById(R.id.gameStatus);
-        mStatusField.setText(getGameStateDescription());
+        mStatusField.setText(ticTacToeGame.getCurrentGameState().description());
         restartButton = (Button) v.findViewById(R.id.restartButton);
-        restartButton.setText("Restart Game");
+        restartButton.setText(R.string.restart_button);
         restartButton.setOnClickListener(new View.OnClickListener() {
                  @Override
                  public void onClick(View v) {
@@ -61,7 +61,7 @@ public class TicTacToeFragment extends Fragment implements View.OnClickListener 
                          tb.setEnabled(true);
                          tb.setChecked(false);
                      }
-                     mStatusField.setText("Playing");
+                     mStatusField.setText(ticTacToeGame.getCurrentGameState().description());
                  }
             }
         );
@@ -76,8 +76,9 @@ public class TicTacToeFragment extends Fragment implements View.OnClickListener 
         selectedButton.setText(playerMark);
         selectedButton.setEnabled(false);
         ticTacToeBoard.makeMove(selectedButton.getX_coord(),selectedButton.getY_coord(), ticTacToeGame.getCurrentPlayer());
-        mStatusField.setText(getGameStateDescription());
-        if (ticTacToeGame.getGameState(ticTacToeBoard.getPlayerState(ticTacToeGame.getCurrentPlayer()), ticTacToeBoard.getBoardState()) != GameState.PLAYING) {
+        ticTacToeGame.updateGameState(ticTacToeBoard.getPlayerState(ticTacToeGame.getCurrentPlayer()), ticTacToeBoard.getBoardState());
+        mStatusField.setText(ticTacToeGame.getCurrentGameState().description());
+        if (ticTacToeGame.getCurrentGameState() != GameState.PLAYING) {
             for (ToggleButton tb : buttons.values()) {
                 tb.setEnabled(false);
             }
@@ -85,7 +86,7 @@ public class TicTacToeFragment extends Fragment implements View.OnClickListener 
         ticTacToeGame.setNextPlayer();
     }
 
-    private String getGameStateDescription() {
+    /*private String getGameStateDescription() {
         String stateDescription = "Not Playing";
         switch (ticTacToeGame.getGameState(ticTacToeBoard.getPlayerState(ticTacToeGame.getCurrentPlayer()), ticTacToeBoard.getBoardState())) {
             case PLAYING:
@@ -108,7 +109,7 @@ public class TicTacToeFragment extends Fragment implements View.OnClickListener 
                 break;
         }
         return stateDescription;
-    }
+    }*/
 
     @Override
     public void onResume() {
@@ -129,7 +130,7 @@ public class TicTacToeFragment extends Fragment implements View.OnClickListener 
                 tb.setText("0");
             }
         }
-        if (ticTacToeGame.getGameState(ticTacToeBoard.getPlayerState(ticTacToeGame.getCurrentPlayer()), ticTacToeBoard.getBoardState()) != GameState.PLAYING) {
+        if (ticTacToeGame.getCurrentGameState() != GameState.PLAYING) {
             for (ToggleButton tb : buttons.values()) {
                 tb.setEnabled(false);
             }
