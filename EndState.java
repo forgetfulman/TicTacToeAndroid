@@ -1,6 +1,6 @@
 package com.forgetfulman.tictactoe;
 
-public enum EndState {
+enum EndState {
     ROW2 (0b111000000),
     ROW1 (0b000111000),
     ROW0 (0b000000111),

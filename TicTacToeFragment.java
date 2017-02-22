@@ -86,31 +86,6 @@ public class TicTacToeFragment extends Fragment implements View.OnClickListener 
         ticTacToeGame.setNextPlayer();
     }
 
-    /*private String getGameStateDescription() {
-        String stateDescription = "Not Playing";
-        switch (ticTacToeGame.getGameState(ticTacToeBoard.getPlayerState(ticTacToeGame.getCurrentPlayer()), ticTacToeBoard.getBoardState())) {
-            case PLAYING:
-                stateDescription = "Playing";
-                break;
-
-            case DRAW:
-                stateDescription = "It's a Draw!";
-                break;
-
-            case CROSS_WINS:
-                stateDescription = "Crosses Win!";
-                break;
-
-            case NOUGHT_WINS:
-                stateDescription = "Noughts Win!";
-                break;
-
-            default:
-                break;
-        }
-        return stateDescription;
-    }*/
-
     @Override
     public void onResume() {
         super.onResume();
