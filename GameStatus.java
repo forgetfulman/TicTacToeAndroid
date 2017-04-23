@@ -1,6 +1,6 @@
 package com.forgetfulman.tictactoe;
 
-enum GameState {
+enum GameStatus {
     PLAYING (R.string.game_state_playing),
     DRAW (R.string.game_state_draw),
     CROSS_WINS (R.string.game_state_crosses),
@@ -8,7 +8,7 @@ enum GameState {
 
     private final int descriptionId;
 
-    GameState(int description) {
+    GameStatus(int description) {
         this.descriptionId = description;
     }
 
